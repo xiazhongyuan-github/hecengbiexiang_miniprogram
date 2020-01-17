@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/shouye/shouye",
+    "pages/myself/myself",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/jizhang/jiZhang"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "仲渊.钱包",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "color": "#000000",
+    "selectedColor": "#568289",
+    "list": [
+      {
+        "pagePath": "pages/shouye/shouye",
+        "text": "首页",
+        "iconPath": "/static/images/shouye1.png",
+        "selectedIconPath": "/static/images/shouye2.png"
+      },
+      {
+        "pagePath": "pages/myself/myself",
+        "text": "我的",
+        "iconPath": "/static/images/wode1.png",
+        "selectedIconPath": "/static/images/wode2.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

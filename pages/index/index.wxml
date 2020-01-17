@@ -1,0 +1,29 @@
+<!-- 最外层 -->
+<view>
+  <view class="pro-con">
+  <button wx:if="{{flag}}" bindtap="handleClick" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</button>
+  <view wx:for="{{list}}" wx:key="indix" style="margin-top:1vh;">
+    <view style="width:100%; display: flex;margin-top:1.5vh;">
+        <view style="width: 10%;height:5vh;">
+            <image style="width: 60rpx; height: 60rpx;padding-left:10rpx;border-radius:5rpx;" src="{{item.headPortrait}}"></image>
+        </view>
+         <view style="width:90%;">
+            <view style="width:100%;font-size:25rpx;">{{item.name}}:</view>
+            <view style="word-break: keep-all;word-wrap: break-word;white-space: pre-line;width:100%;font-size:25rpx;padding-left:50rpx;padding-right:10rpx;">{{item.commentContent}}</view>
+        </view>
+    </view>
+  </view>
+  </view>
+</view>
+<form bindsubmit="submitForm" report-submit="true">
+  <view class="release">
+    <view  wx:if="{{reply}}" class="replyinfo1">
+      回复<text class="text">{{replyUserName}}</text>
+      <button class="cancel" bindtap="cancleReply">取消回复</button>
+    </view>
+    <view class="replyinfo2">
+      <textarea placeholder-class="input_null" fixed="true" maxlength="-1" show-confirm-bar="false" cursor-spacing="15" auto-height="true" placeholder="请输入回复" name="comment" value="{{content}}"></textarea>
+      <button form-type="submit" class="submit">发送</button>
+    </view>
+  </view>
+</form>
