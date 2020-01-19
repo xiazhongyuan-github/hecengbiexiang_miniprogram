@@ -189,6 +189,13 @@ Page({
       icon: 'none'
     })
   },
+  getUserInfo(eve) {
+    let info = eve.detail.userInfo
+    app.globalData.userInfo = info
+    this.setData({
+      flag: false
+    })
+  },
   submitForm(e) {
     //获取输入的评论内容
     let commentContent = e.detail.value.comment
@@ -198,21 +205,11 @@ Page({
       return;
     }
     // 申请权限
-    if (Object.keys(app.globalData.userInfo).length < 1) {
-      wx.authorize({
-        scope: 'scope.userInfo',
-        success() {
-          wx.getUserInfo({
-            success: res => {
-              app.globalData.userInfo = res.userInfo
-            }
-          })
-        }
-      })
-    }
     let userInfo = app.globalData.userInfo
     if (Object.keys(userInfo).length < 1) {
-      that.data.flag = true
+      that.setData({
+        flag: true
+      })
       that.showMistake("请点击授权按钮，允许获取您的名称及头像信息")
       return
     }
