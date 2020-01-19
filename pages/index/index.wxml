@@ -8,7 +8,14 @@
             <image style="width: 60rpx; height: 60rpx;padding-left:10rpx;border-radius:5rpx;" src="{{item.headPortrait}}"></image>
         </view>
          <view style="width:90%;">
-            <view style="width:100%;font-size:25rpx;">{{item.name}}:</view>
+            <view style="display: flex;">
+                <view style="width:85%;font-size:25rpx;">{{item.name}}:</view>
+                <view style="width:15%;display: flex;">
+                    <image wx:if="{{item.is_applaud}}" style="width:40%;height:100%" src="../../static/images/applaud.png" bindtap="cancelApplaud" data-code="{{item.code}}"></image>
+                    <image wx:else style="width:40%;height:100%" src="../../static/images/cancel.png" bindtap="applaud" data-code="{{item.code}}"></image>
+                    <view style="width: 60%;margin-left: 10%;font-size:25rpx;">{{item.count}}</view>
+                </view>
+            </view>
             <view style="word-break: keep-all;word-wrap: break-word;white-space: pre-line;width:100%;font-size:25rpx;padding-left:50rpx;padding-right:10rpx;">{{item.commentContent}}</view>
         </view>
     </view>

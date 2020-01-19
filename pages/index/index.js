@@ -32,7 +32,8 @@ Page({
       url: app.globalData.postUrl + '/commentController/getCommentsByArticleId',
       method: 'POST',
       data: {
-        'articleId': that.data.articleId
+        'articleId': that.data.articleId,
+        'openId' : app.globalData.openId
       },
       success: res => {
         if (res.data.retCode == 0) {
@@ -42,6 +43,60 @@ Page({
         }
         else {
           wx.hideLoading();
+          wx.showModal({
+            title: '提示',
+            content: res.data.retMsg,
+            showCancel: false
+          })
+
+        }
+      }
+    })
+  },
+  // 取消点赞
+  cancelApplaud: function(eve) {
+    let that = this
+    let code = eve.currentTarget.dataset.code
+    wx.request({
+      // 通过此 url,验证是否面登录
+      url: app.globalData.postUrl + '/applaudController/cancelApplaud',
+      method: 'POST',
+      data: {
+        'commentCode': code,
+        'openId' : app.globalData.openId
+      },
+      success: res => {
+        if (res.data.retCode == 0) {
+          that.getHistoryComment()
+        }
+        else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.retMsg,
+            showCancel: false
+          })
+
+        }
+      }
+    })
+  },
+  //点赞
+  applaud: function(eve) {
+    let that = this
+    let code = eve.currentTarget.dataset.code
+    wx.request({
+      // 通过此 url,验证是否面登录
+      url: app.globalData.postUrl + '/applaudController/applaud',
+      method: 'POST',
+      data: {
+        'commentCode': code,
+        'openId' : app.globalData.openId
+      },
+      success: res => {
+        if (res.data.retCode == 0) {
+          that.getHistoryComment()
+        }
+        else {
           wx.showModal({
             title: '提示',
             content: res.data.retMsg,
