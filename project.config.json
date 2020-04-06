@@ -63,11 +63,12 @@
 					"referrerInfo": {}
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "公众号跳转",
 					"pathName": "pages/index/index",
 					"query": "articleId=123",
-					"scene": null
+					"scene": 1035,
+					"referrerInfo": {}
 				}
 			]
 		}
