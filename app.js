@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    postUrl: 'https://www.xiazhongyuan.cn:443',
+    postUrl: 'https://www.xiazhongyuan.cn:8082',
     // postUrl: 'http://127.0.0.1:443',
     articleId: '',
     session_key: '',

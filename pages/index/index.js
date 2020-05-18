@@ -107,74 +107,6 @@ Page({
       }
     })
   },
-
-  /**
-   * 页面下拉刷新事件的处理函数
-   */
-  // refresh: function () {
-  //     mydata.page = 1
-  //     this.getPageInfo(mydata.page, function () {
-  //         this.setData({
-  //             list: []
-  //         })
-  //     });
-  //     mydata.end = 0;
-  // },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  // bindDownLoad: function () {
-  //     var that = this;
-  //     if (mydata.end == 0) {
-  //         mydata.page++;
-  //         that.getPageInfo(mydata.page);
-  //     }
-  // },
-  // bindReply: function (e) {
-  //     mydata.commentId = e.target.dataset.commentid;
-  //     mydata.replyUserName = e.target.dataset.commentusername;
-  //     this.setData({
-  //         replyUserName: mydata.replyUserName,
-  //         reply: true
-  //     })
-  // },
-  // 合并数组
-  // addArr(arr1, arr2) {
-  //     for (var i = 0; i < arr2.length; i++) {
-  //         arr1.push(arr2[i]);
-  //     }
-  //     return arr1;
-  // },
-  // deleteComment: function (e) {
-  //     var that = this;
-  //     var commentId = e.target.dataset.commentid;
-  //
-  //     wx.showModal({
-  //         title: '删除评论',
-  //         content: '请确认是否删除该评论？',
-  //         success: function (res) {
-  //             if (res.confirm) {
-  //                 wx.request({
-  //                     url: config.deleteComment,
-  //                     method: "POST",
-  //                     data: {
-  //                         commentId: commentId
-  //                     },
-  //                     header: {
-  //                         "content-type": "application/x-www-form-urlencoded;charset=utf-8",
-  //                     },
-  //                     success: res => {
-  //                         that.refresh();
-  //                         wx.showToast({
-  //                             title: "删除成功"
-  //                         })
-  //                     }
-  //                 })
-  //             } else if (res.cancel) {
-  //             }
-  //         }
-  //     })
-  // },
   cancleReply: function (e) {
     mydata.commentId = "";
     mydata.replyUserName = "";
@@ -241,6 +173,52 @@ Page({
           wx.showToast({
             title: '回复失败，请检查您的网络',
           })
+        }
+      }
+    })
+  },
+
+  longPress(param) {
+    let _this = this
+    let wxid = param.currentTarget.dataset.wxid
+    if (wxid === app.globalData.openId) {
+      let code = param.currentTarget.dataset.code
+      wx.showModal({
+        title:"删除评论",
+        content:"是否删除？",
+        success (res) {
+          if (res.confirm) {
+            _this.deleteByCode(code,app.globalData.openId)
+          }
+        }
+      })
+    }
+  },
+  //删除
+  deleteByCode(code,openId) {
+    let that = this
+    wx.request({
+      // 通过此 url,验证是否面登录
+      url: app.globalData.postUrl + '/commentController/deleteByCode',
+      method: 'POST',
+      data: {
+        'code': code,
+        'openId' : openId
+      },
+      success: res => {
+        if (res.data.retCode == 0) {
+          wx.showToast({
+            title:res.data.retData
+          })
+          that.getHistoryComment()
+        }
+        else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.retMsg,
+            showCancel: false
+          })
+
         }
       }
     })

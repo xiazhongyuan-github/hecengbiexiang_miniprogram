@@ -16,7 +16,7 @@
                     <view style="width: 60%;margin-left: 10%;font-size:25rpx;">{{item.count}}</view>
                 </view>
             </view>
-            <view style="word-break: keep-all;word-wrap: break-word;white-space: pre-line;width:100%;font-size:25rpx;padding-left:50rpx;padding-right:10rpx;">{{item.commentContent}}</view>
+            <view bindlongpress="longPress" data-code="{{item.code}}" data-wxId="{{item.wxId}}" style="word-break: keep-all;word-wrap: break-word;white-space: pre-line;width:100%;font-size:25rpx;padding-left:50rpx;padding-right:10rpx;">{{item.commentContent}}</view>
         </view>
     </view>
   </view>
